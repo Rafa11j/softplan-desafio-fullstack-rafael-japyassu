@@ -1,5 +1,6 @@
 package br.com.processapi.processapi.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,9 +33,9 @@ public class User {
     private String email;
 
     @NotBlank
+    @JsonIgnore
     private String password;
 
-    @NotBlank
     private UserType userType;
 
     @Column(name = "created_at", updatable=false)
