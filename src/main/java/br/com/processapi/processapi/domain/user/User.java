@@ -32,7 +32,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @NotBlank
+//    @NotBlank
     @JsonIgnore
     private String password;
 

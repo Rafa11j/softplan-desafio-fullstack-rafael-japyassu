@@ -4,6 +4,7 @@ import br.com.processapi.processapi.domain.user.User;
 import br.com.processapi.processapi.domain.user.UserRepository;
 import br.com.processapi.processapi.domain.user.UserType;
 import br.com.processapi.processapi.web.dtos.request.CreateUser;
+import br.com.processapi.processapi.web.dtos.request.UpdateUser;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,8 +27,15 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @SneakyThrows
     public User findById(UUID id) {
-        return userRepository.findById(id).get();
+
+        User user = userRepository.findById(id).get();
+        if (user == null) {
+            throw new Exception("Usuário não encontrado!");
+        }
+
+        return user;
     }
 
     @Override
@@ -35,7 +43,6 @@ public class UserServiceImpl implements UserService{
     public User save(CreateUser createUser) {
 
         if (userRepository.findByEmail(createUser.getEmail()) != null) {
-            System.out.println("E-mail já utilizado!");
             throw new Exception("Este e-mail já está sendo utilizado por outro usuário");
         }
 
@@ -45,5 +52,25 @@ public class UserServiceImpl implements UserService{
         user.setPassword(passwordEncoder.encode(createUser.getPassword()));
         user.setUserType(UserType.valueOf(createUser.getUserType()));
         return userRepository.save(user);
+    }
+
+    @Override
+    @SneakyThrows
+    public User update(UUID id, UpdateUser updateUser) {
+        User findUser = userRepository.findByEmail(updateUser.getEmail());
+        if (findUser != null && !updateUser.getEmail().equals(findUser.getEmail())) {
+            throw new Exception("Este e-mail já está sendo utilizado por outro usuário");
+        }
+        User user = new User();
+        user.setId(id);
+        user.setName(updateUser.getName());
+        user.setEmail(updateUser.getEmail());
+        user.setUserType(UserType.valueOf(updateUser.getUserType()));
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void delete(UUID id) {
+        userRepository.deleteById(id);
     }
 }
