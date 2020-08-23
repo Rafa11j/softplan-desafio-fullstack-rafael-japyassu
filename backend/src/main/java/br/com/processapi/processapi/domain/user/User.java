@@ -39,11 +39,6 @@ public class User {
 
     private UserType userType;
 
-//    @OneToMany(targetEntity = Process.class, cascade = CascadeType.ALL)
-//    @JoinColumn(referencedColumnName = "id")
-//    @OneToMany(targetEntity = Process.class, mappedBy = "users", cascade = CascadeType.ALL)
-//    private List<Process> processes;
-
     @Column(name = "created_at", updatable=false)
     @CreationTimestamp
     private Date createdAt;

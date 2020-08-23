@@ -22,16 +22,31 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = UriMapper.USER)
 @AllArgsConstructor
-//@PreAuthorize("@processSecurityService.hasPermissionAdministrator(authentication)")
+@PreAuthorize("@processSecurityService.hasPermissionAdministrator(authentication)")
 public class UserController {
 
     private final UserServiceImpl userService;
 
     @GetMapping
-    public ResponseEntity<Response<Page<User>>> index() {
-        Response<Page<User>> response = new Response<>();
+    public ResponseEntity<Response<List<User>>> index() {
+        Response<List<User>> response = new Response<>();
         try {
             response.setData(userService.findAll());
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            List<String> errors = new ArrayList<>();
+            errors.add(e.getMessage());
+            response.setErrors(errors);
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+    @GetMapping("/paginated")
+    public ResponseEntity<Response<Page<User>>> paginated(@RequestParam(name = "page") int page,
+                                                          @RequestParam(name = "size") int size) {
+        Response<Page<User>> response = new Response<>();
+        try {
+            response.setData(userService.findAllPaginated(page, size));
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             List<String> errors = new ArrayList<>();

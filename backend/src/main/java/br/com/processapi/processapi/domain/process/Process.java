@@ -30,8 +30,7 @@ public class Process {
     @Column(nullable = false)
     private String stick;
 
-    @Lob
-    @Column(nullable = false)
+    @Column(columnDefinition = "text", nullable = false)
     private String subject;
 
     @Column(columnDefinition="Decimal(20,2)", nullable = false)
@@ -40,17 +39,14 @@ public class Process {
     @Column(nullable = false)
     private String lawyer;
 
-    @Column(nullable = false)
+    @Column(name = "process_type", nullable = false)
     private String processType;
 
     private String opinion;
 
+    @Column(columnDefinition = "varchar(100) default 'OPEN'")
+    @Enumerated(value = EnumType.STRING)
     private ProcessState state;
-
-//    @OneToMany(targetEntity = User.class, cascade = CascadeType.ALL)
-//    @JoinColumn(referencedColumnName = "id")
-//    @OneToMany(targetEntity = User.class ,mappedBy = "processes", cascade = CascadeType.ALL)
-//    private List<User> users;
 
     @Column(name = "created_at", updatable=false)
     @CreationTimestamp

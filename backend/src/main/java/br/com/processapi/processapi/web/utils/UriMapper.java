@@ -10,9 +10,10 @@ public class UriMapper {
 
     public static final String PROCESS = API_BASE_URL + "/process";
 
+    public static final String USER_PROCESS = API_BASE_URL + "/user-process";
+
     public static final String[] PUBLIC_URI = {
             AUTH,
-            USER
     };
 
 }

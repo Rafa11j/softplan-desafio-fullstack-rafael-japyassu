@@ -12,7 +12,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -23,7 +25,12 @@ public class UserServiceImpl implements UserService{
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public Page<User> findAll() {
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public Page<User> findAllPaginated(int page, int size) {
         Pageable pageable = PageRequest.of(0, 10);
         return userRepository.findAll(pageable);
     }

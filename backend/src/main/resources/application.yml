@@ -10,6 +10,8 @@ spring:
         password: postgres
         url: jdbc:postgresql://localhost:5432/db_desafio_softplan
         driver-class-name: org.postgresql.Driver
+        hikari:
+          auto-commit: true
 
 jwt:
     secret: 463a6dcdce9b50b5a803449692b5523c
