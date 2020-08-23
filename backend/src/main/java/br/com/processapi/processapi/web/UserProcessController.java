@@ -1,11 +1,9 @@
 package br.com.processapi.processapi.web;
 
-import br.com.processapi.processapi.domain.user.User;
 import br.com.processapi.processapi.domain.userprocess.UserProcess;
 import br.com.processapi.processapi.service.userprocess.UserProcessServiceImpl;
 import br.com.processapi.processapi.web.dtos.request.AddOpinionProcess;
 import br.com.processapi.processapi.web.dtos.request.AddProcessToUser;
-import br.com.processapi.processapi.web.dtos.request.CreateUser;
 import br.com.processapi.processapi.web.dtos.response.ProcessOpinionResponse;
 import br.com.processapi.processapi.web.utils.Response;
 import br.com.processapi.processapi.web.utils.UriMapper;
