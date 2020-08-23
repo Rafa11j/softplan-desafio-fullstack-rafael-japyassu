@@ -7,14 +7,13 @@ import br.com.processapi.processapi.web.dtos.request.UpdateUser;
 import br.com.processapi.processapi.web.utils.Response;
 import br.com.processapi.processapi.web.utils.UriMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +22,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = UriMapper.USER)
 @AllArgsConstructor
+//@PreAuthorize("@processSecurityService.hasPermissionAdministrator(authentication)")
 public class UserController {
 
     private final UserServiceImpl userService;
 
     @GetMapping
-    @PreAuthorize("@processSecurityService.hasPermissionAdministrator(authentication)")
-    public ResponseEntity<Response<List<User>>> index() {
-        Response<List<User>> response = new Response<>();
+    public ResponseEntity<Response<Page<User>>> index() {
+        Response<Page<User>> response = new Response<>();
         try {
             response.setData(userService.findAll());
             return ResponseEntity.ok().body(response);

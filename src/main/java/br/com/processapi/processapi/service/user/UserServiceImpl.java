@@ -7,11 +7,12 @@ import br.com.processapi.processapi.web.dtos.request.CreateUser;
 import br.com.processapi.processapi.web.dtos.request.UpdateUser;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -22,8 +23,9 @@ public class UserServiceImpl implements UserService{
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public Page<User> findAll() {
+        Pageable pageable = PageRequest.of(0, 10);
+        return userRepository.findAll(pageable);
     }
 
     @Override

@@ -8,8 +8,11 @@ public class UriMapper {
 
     public static final String USER = API_BASE_URL + "/users";
 
+    public static final String PROCESS = API_BASE_URL + "/process";
+
     public static final String[] PUBLIC_URI = {
-            AUTH
+            AUTH,
+            USER
     };
 
 }
