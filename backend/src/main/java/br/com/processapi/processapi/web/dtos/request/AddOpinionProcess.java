@@ -13,11 +13,6 @@ public class AddOpinionProcess {
     @NotNull(message = "O parecer não pode ser nulo")
     private String opinion;
 
-    @NotEmpty(message = "O id processo não pode ser vazio")
     @NotNull(message = "O id processo não pode ser nulo")
-    private UUID process_id;
-
-    @NotEmpty(message = "O id usuário não pode ser vazio")
-    @NotNull(message = "O id usuário não pode ser nulo")
-    private UUID user_id;
+    private UUID process;
 }

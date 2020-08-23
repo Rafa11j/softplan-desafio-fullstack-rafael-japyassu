@@ -2,8 +2,10 @@ package br.com.processapi.processapi.web;
 
 import br.com.processapi.processapi.domain.user.User;
 import br.com.processapi.processapi.service.user.UserServiceImpl;
+import br.com.processapi.processapi.service.userprocess.UserProcessServiceImpl;
 import br.com.processapi.processapi.web.dtos.request.CreateUser;
 import br.com.processapi.processapi.web.dtos.request.UpdateUser;
+import br.com.processapi.processapi.web.dtos.response.UserProcessResponse;
 import br.com.processapi.processapi.web.utils.Response;
 import br.com.processapi.processapi.web.utils.UriMapper;
 import lombok.AllArgsConstructor;
@@ -26,6 +28,7 @@ import java.util.UUID;
 public class UserController {
 
     private final UserServiceImpl userService;
+    private final UserProcessServiceImpl userProcessService;
 
     @GetMapping
     public ResponseEntity<Response<List<User>>> index() {
@@ -68,6 +71,13 @@ public class UserController {
             response.setErrors(errors);
             return ResponseEntity.badRequest().body(response);
         }
+    }
+
+    @GetMapping("/{id}/process")
+    public ResponseEntity<Response<List<UserProcessResponse>>> findMyProcess(@PathVariable("id") UUID id) {
+        Response<List<UserProcessResponse>> response = new Response<>();
+        response.setData(userProcessService.findUserProcess(id));
+        return ResponseEntity.ok().body(response);
     }
 
     @PostMapping

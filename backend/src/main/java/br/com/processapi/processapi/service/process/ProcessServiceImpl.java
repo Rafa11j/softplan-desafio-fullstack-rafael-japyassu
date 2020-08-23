@@ -60,7 +60,7 @@ public class ProcessServiceImpl implements ProcessService{
 
     @Override
     public Process setOpinion(AddOpinionProcess opinionProcess) {
-        Process process = findById(opinionProcess.getProcess_id());
+        Process process = findById(opinionProcess.getProcess());
 
         process.setOpinion(opinionProcess.getOpinion());
         process.setState(ProcessState.FINISHED);

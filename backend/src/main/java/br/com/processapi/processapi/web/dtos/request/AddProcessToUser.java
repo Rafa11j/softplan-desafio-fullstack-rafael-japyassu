@@ -2,7 +2,6 @@ package br.com.processapi.processapi.web.dtos.request;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
