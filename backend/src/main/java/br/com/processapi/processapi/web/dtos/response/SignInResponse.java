@@ -11,7 +11,5 @@ import lombok.NoArgsConstructor;
 public class SignInResponse {
 
     private String token;
-    private String name;
-    private String email;
-    private UserType userType;
+    private UserSignInResponse user;
 }

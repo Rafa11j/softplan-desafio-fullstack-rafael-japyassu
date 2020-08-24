@@ -1,0 +1,27 @@
+#signin-page {
+  height: 100%;
+  background: url("../../assets/background.jpg") no-repeat center;
+  background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .signin-card {
+    width: 300px;
+    height: 330px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .btn-signin {
+      margin-top: 15px;
+      width: 100%;
+    }
+  }
+}

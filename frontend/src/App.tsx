@@ -1,12 +1,15 @@
 import React from 'react';
-import { Button } from 'antd';
+import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './hooks/auth';
+import Routes from './routes';
 
 const App: React.FC = () => {
   return (
-    <div>
-      <h1>Desafio Softplan</h1>
-      <Button type="primary">Teste</Button>
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
+    </BrowserRouter>
   );
 };
 
