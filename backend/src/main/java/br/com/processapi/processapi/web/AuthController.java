@@ -40,7 +40,7 @@ public class AuthController {
             String token = jwtUtils.generateToken(signIn.getEmail());
             User user = userRepository.findByEmail(signIn.getEmail());
 
-            response.setData(new SignInResponse(token, new UserSignInResponse(user.getName(), user.getEmail(), user.getUserType())));
+            response.setData(new SignInResponse(token, new UserSignInResponse(user.getId(), user.getName(), user.getEmail(), user.getUserType())));
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             List<String> errors = new ArrayList<>();

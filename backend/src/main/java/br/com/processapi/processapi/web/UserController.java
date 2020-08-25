@@ -89,6 +89,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}/process")
+    @PreAuthorize("@processSecurityService.hasPermissionFinisher(authentication)")
     public ResponseEntity<Response<List<UserProcessResponse>>> findMyProcess(@PathVariable("id") UUID id) {
         Response<List<UserProcessResponse>> response = new Response<>();
         response.setData(userProcessService.findUserProcess(id));

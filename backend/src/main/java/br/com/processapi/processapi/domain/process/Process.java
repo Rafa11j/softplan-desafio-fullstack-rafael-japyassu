@@ -42,6 +42,7 @@ public class Process {
     @Column(name = "process_type", nullable = false)
     private String processType;
 
+    @Column(columnDefinition = "text")
     private String opinion;
 
     @Column(columnDefinition = "varchar(100) default 'OPEN'")

@@ -11,6 +11,8 @@ import Process from '../pages/Process';
 import ProcessForm from '../pages/Process/Form';
 import ProcessDesignate from '../pages/Process/Designate';
 import ProcessDetail from '../pages/Process/Detail';
+import MyProcess from '../pages/MyProcess';
+import ProcessOpinion from '../pages/MyProcess/ProcessOpinion';
 
 const Routes: React.FC = () => {
   return (
@@ -37,6 +39,19 @@ const Routes: React.FC = () => {
         path="/processos/cadastro"
         exact
         component={ProcessForm}
+        isPrivate
+      />
+      <Route path="/meus-processos" exact component={MyProcess} isPrivate />
+      <Route
+        path="/meus-processos/:id"
+        exact
+        component={ProcessDetail}
+        isPrivate
+      />
+      <Route
+        path="/meus-processos/:id/parecer"
+        exact
+        component={ProcessOpinion}
         isPrivate
       />
     </Switch>

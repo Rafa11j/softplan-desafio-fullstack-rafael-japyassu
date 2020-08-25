@@ -36,10 +36,10 @@ const AppHeader: React.FC = () => {
     }
     return (
       <>
-        <li className="menu-item">
+        <Link to="/meus-processos" className="menu-item">
           <FaGavel />
           Meus Processos
-        </li>
+        </Link>
       </>
     );
   }, [user.userType]);
