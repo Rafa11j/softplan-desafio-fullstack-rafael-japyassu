@@ -46,6 +46,18 @@ public class UserProcessServiceImpl implements UserProcessService{
     }
 
     @Override
+    public List<User> findProcessUsers(UUID process_id) {
+        Process process = processRepository.findById(process_id).get();
+        List<UserProcess> userProcessList = userProcessRepository.findByProcess(process);
+        List<User> users = new ArrayList<>();
+        for (UserProcess userProcess: userProcessList) {
+            users.add(userProcess.getUser());
+        }
+
+        return users;
+    }
+
+    @Override
     @SneakyThrows
     public UserProcess save(AddProcessToUser addProcessToUser) {
 

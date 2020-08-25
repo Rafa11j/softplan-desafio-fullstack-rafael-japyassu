@@ -3,8 +3,10 @@ package br.com.processapi.processapi.service.process;
 import br.com.processapi.processapi.domain.process.Process;
 import br.com.processapi.processapi.domain.process.ProcessRepository;
 import br.com.processapi.processapi.domain.process.ProcessState;
+import br.com.processapi.processapi.service.userprocess.UserProcessServiceImpl;
 import br.com.processapi.processapi.web.dtos.request.AddOpinionProcess;
 import br.com.processapi.processapi.web.dtos.request.CreateProcess;
+import br.com.processapi.processapi.web.dtos.response.UsersOfProcessResponse;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,7 @@ import java.util.UUID;
 public class ProcessServiceImpl implements ProcessService{
 
     private final ProcessRepository processRepository;
+    private final UserProcessServiceImpl userProcessService;
 
     @Override
     public List<Process> findAll() {
@@ -36,7 +39,16 @@ public class ProcessServiceImpl implements ProcessService{
 
     @Override
     public Process findById(UUID id) {
+
         return processRepository.findById(id).get();
+    }
+
+    @Override
+    public UsersOfProcessResponse findUsersOfProcess(UUID id) {
+        UsersOfProcessResponse response = new UsersOfProcessResponse();
+        response.setProcess(processRepository.findById(id).get());
+        response.setUsers(userProcessService.findProcessUsers(id));
+        return response;
     }
 
     @SneakyThrows

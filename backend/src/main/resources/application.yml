@@ -15,4 +15,4 @@ spring:
 
 jwt:
     secret: 463a6dcdce9b50b5a803449692b5523c
-    expiration: 86400000 # 1 dia
+    expiration: 86400000

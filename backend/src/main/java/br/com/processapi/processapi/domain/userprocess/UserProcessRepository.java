@@ -18,4 +18,6 @@ public interface UserProcessRepository extends JpaRepository<UserProcess, UUID> 
 
 //    @Query("select up.process from UserProcess up where up.user.id = :user")
     List<UserProcess> findByUser(User user);
+
+    List<UserProcess> findByProcess(Process process);
 }

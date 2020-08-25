@@ -5,6 +5,7 @@ import br.com.processapi.processapi.domain.user.User;
 import br.com.processapi.processapi.service.process.ProcessService;
 import br.com.processapi.processapi.web.dtos.request.CreateProcess;
 import br.com.processapi.processapi.web.dtos.request.CreateUser;
+import br.com.processapi.processapi.web.dtos.response.UsersOfProcessResponse;
 import br.com.processapi.processapi.web.utils.Response;
 import br.com.processapi.processapi.web.utils.UriMapper;
 import lombok.AllArgsConstructor;
@@ -44,6 +45,20 @@ public class ProcessController {
         Response<Process> response = new Response<>();
         try {
             response.setData(processService.findById(id));
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            List<String> errors = new ArrayList<>();
+            errors.add(e.getMessage());
+            response.setErrors(errors);
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+    @GetMapping("/{id}/users")
+    public ResponseEntity<Response<UsersOfProcessResponse>> showUsers(@PathVariable(name = "id") UUID id) {
+        Response<UsersOfProcessResponse> response = new Response<>();
+        try {
+            response.setData(processService.findUsersOfProcess(id));
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             List<String> errors = new ArrayList<>();

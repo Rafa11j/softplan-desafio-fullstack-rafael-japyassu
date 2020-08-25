@@ -27,14 +27,10 @@ const AppHeader: React.FC = () => {
     if (user.userType === UserTypes.TRIATOR) {
       return (
         <>
-          <Link to="/usuarios" className="menu-item">
-            <FaUsers />
-            Usuários
-          </Link>
-          <li className="menu-item">
+          <Link to="/processos" className="menu-item">
             <FaGavel />
             Processos
-          </li>
+          </Link>
         </>
       );
     }

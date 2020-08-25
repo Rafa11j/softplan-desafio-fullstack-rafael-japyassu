@@ -15,6 +15,12 @@ public class ProcessSecurityService {
         return roles.contains("ADMINISTRATOR");
     }
 
+    public boolean hasPermissionListUsers(Authentication authentication) {
+        List<String> roles = new ArrayList<>();
+        authentication.getAuthorities().forEach(grantedAuthority -> roles.add(grantedAuthority.toString()));
+        return !roles.contains("FINISHER");
+    }
+
     public boolean hasPermissionTriator(Authentication authentication) {
         List<String> roles = new ArrayList<>();
         authentication.getAuthorities().forEach(grantedAuthority -> roles.add(grantedAuthority.toString()));

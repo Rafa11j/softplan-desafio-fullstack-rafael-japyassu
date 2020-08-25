@@ -1,0 +1,17 @@
+.process-page {
+  padding: 30px;
+
+  .page-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+  }
+
+  .ant-col {
+    padding: 5px;
+  }
+}

@@ -25,7 +25,6 @@ import java.util.UUID;
 @RequestMapping(value = UriMapper.USER)
 @AllArgsConstructor
 @PreAuthorize("@processSecurityService.hasPermissionAdministrator(authentication)")
-//@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserServiceImpl userService;
@@ -36,6 +35,21 @@ public class UserController {
         Response<List<User>> response = new Response<>();
         try {
             response.setData(userService.findAll());
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            List<String> errors = new ArrayList<>();
+            errors.add(e.getMessage());
+            response.setErrors(errors);
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+    @GetMapping("/finishers")
+    @PreAuthorize("@processSecurityService.hasPermissionListUsers(authentication)")
+    public ResponseEntity<Response<List<User>>> listFinishers() {
+        Response<List<User>> response = new Response<>();
+        try {
+            response.setData(userService.findAllFinishers());
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             List<String> errors = new ArrayList<>();

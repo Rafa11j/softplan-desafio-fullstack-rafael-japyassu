@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public interface UserService {
     List<User> findAll();
+    List<User> findAllFinishers();
     Page<User> findAllPaginated(int page, int size);
     User findById(UUID id);
     User save(CreateUser createUser);

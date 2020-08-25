@@ -31,6 +31,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public List<User> findAllFinishers() {
+        return userRepository.findFinishers();
+    }
+
+    @Override
     public Page<User> findAllPaginated(int page, int size) {
         Pageable pageable = PageRequest.of(0, 10);
         return userRepository.findAll(pageable);
