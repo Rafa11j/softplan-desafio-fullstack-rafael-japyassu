@@ -10,6 +10,7 @@ import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     @Override
@@ -74,6 +75,7 @@ public class UserServiceImpl implements UserService{
         user.setId(id);
         user.setName(updateUser.getName());
         user.setEmail(updateUser.getEmail());
+        user.setPassword(findUser.getPassword());
         user.setUserType(UserType.valueOf(updateUser.getUserType()));
         return userRepository.save(user);
     }

@@ -1,0 +1,5 @@
+export enum UserTypes {
+  ADMINISTRATOR = 'ADMINISTRATOR',
+  TRIATOR = 'TRIATOR',
+  FINISHER = 'FINISHER',
+}

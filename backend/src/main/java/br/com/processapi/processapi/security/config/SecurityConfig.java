@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         String[] publicUris = Stream.of(UriMapper.PUBLIC_URI).flatMap(Stream::of).toArray(String[]::new);
 
-        http.csrf().disable().authorizeRequests().antMatchers(publicUris).permitAll()
+        http.cors().and().csrf().disable().authorizeRequests().antMatchers(publicUris).permitAll()
                 .anyRequest().authenticated().and().exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -65,6 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

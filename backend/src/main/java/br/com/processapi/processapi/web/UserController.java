@@ -25,6 +25,7 @@ import java.util.UUID;
 @RequestMapping(value = UriMapper.USER)
 @AllArgsConstructor
 @PreAuthorize("@processSecurityService.hasPermissionAdministrator(authentication)")
+//@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserServiceImpl userService;

@@ -23,6 +23,7 @@ const SignIn: React.FC = () => {
         await signIn({ email: auth.email, password: auth.password });
         history.push('/inicio');
       } catch (err) {
+        console.log(err);
         if (err.response !== undefined) {
           notification.warning({
             message: 'Alerta',

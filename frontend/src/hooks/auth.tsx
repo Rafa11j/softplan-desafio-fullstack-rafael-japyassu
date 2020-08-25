@@ -39,7 +39,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const signIn = useCallback(async ({ email, password }) => {
     const response = await api.post('/auth', { email, password });
-    console.log(response.data.data);
+
     const { token, user } = response.data.data;
     localStorage.setItem('@ADVSoft:token', token);
     localStorage.setItem('@ADVSoft:user', JSON.stringify(user));
@@ -52,7 +52,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const signOut = useCallback(() => {
     localStorage.removeItem('@ADVSoft:token');
     localStorage.removeItem('@ADVSoft:user');
-
+    api.defaults.headers = {};
     setData({} as AuthState);
   }, []);
 

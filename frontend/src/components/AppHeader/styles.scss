@@ -1,0 +1,54 @@
+.app-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #0d47a1;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  
+  h2 {
+    color: #fff;
+  }
+
+  .header-actions {
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    
+      .menu-item {
+        cursor: pointer;
+        padding: 0 20px;
+        color: #fff;
+        transition: 0.2s;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          margin-right: 10px;
+          font-size: 16px;
+        }
+
+        &:hover {
+          background: #002171;
+        }
+      }
+
+      .menu-item-profile {
+        color: #fff;
+        font-weight: bold;
+        margin-left: 10px;
+
+        img {
+          height: 35px;
+          margin-right: 5px;
+        }
+      }
+    }
+
+
+  }
+}

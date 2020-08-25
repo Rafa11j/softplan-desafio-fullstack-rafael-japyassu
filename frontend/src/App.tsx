@@ -1,14 +1,16 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthProvider } from './hooks/auth';
+import { useAuth } from './hooks/auth';
 import Routes from './routes';
+import AppHeader from './components/AppHeader';
 
 const App: React.FC = () => {
+  const { user } = useAuth();
+
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Routes />
-      </AuthProvider>
+      {user && <AppHeader />}
+      <Routes />
     </BrowserRouter>
   );
 };
