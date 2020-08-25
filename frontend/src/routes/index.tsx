@@ -28,17 +28,17 @@ const Routes: React.FC = () => {
         isPrivate
       />
       <Route path="/processos" exact component={Process} isPrivate />
+      <Route
+        path="/processos/cadastro"
+        exact
+        component={ProcessForm}
+        isPrivate
+      />
       <Route path="/processos/:id" exact component={ProcessDetail} isPrivate />
       <Route
         path="/processos/:id/designar"
         exact
         component={ProcessDesignate}
-        isPrivate
-      />
-      <Route
-        path="/processos/cadastro"
-        exact
-        component={ProcessForm}
         isPrivate
       />
       <Route path="/meus-processos" exact component={MyProcess} isPrivate />

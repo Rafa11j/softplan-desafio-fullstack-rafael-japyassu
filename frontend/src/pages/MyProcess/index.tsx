@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Table, Tag, Button, Dropdown, Menu } from 'antd';
-import { EyeOutlined, TeamOutlined, EditOutlined } from '@ant-design/icons';
+import { EyeOutlined, EditOutlined } from '@ant-design/icons';
 import { FaEllipsisV } from 'react-icons/fa';
 import { ColumnsType } from 'antd/lib/table';
 import { useHistory } from 'react-router-dom';
@@ -129,7 +129,6 @@ const MyProcess: React.FC = () => {
       const response = await api.get(`/users/${user.id}/process`);
       setTimeout(() => {
         setProcess(response.data.data);
-        console.log(response.data.data);
         setLoading(false);
       }, 1500);
     }

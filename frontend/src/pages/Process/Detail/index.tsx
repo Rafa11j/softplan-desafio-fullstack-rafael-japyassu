@@ -1,25 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  Button,
-  Descriptions,
-  Card,
-  Badge,
-  Row,
-  Col,
-  Divider,
-  Table,
-  Tag,
-} from 'antd';
+import { Button, Card, Row, Col, Divider, Table } from 'antd';
 import { useParams, useHistory } from 'react-router-dom';
 import { DoubleLeftOutlined } from '@ant-design/icons';
 import { ColumnsType } from 'antd/lib/table';
 import IProcess from '../../../interfaces/process';
 import api from '../../../services/api';
-import formatValue from '../../../utils/formatValue';
-import formatDate from '../../../utils/formatDate';
 
 import IUser from '../../../interfaces/user';
-import { ProcessState } from '../../../enums/enums';
+import ProcessInfo from '../../../components/ProcessInfo';
 
 interface IUserProcess {
   user: string;
@@ -76,52 +64,7 @@ const ProcessDetail: React.FC = () => {
       <Row>
         <Col span={24}>
           <Card>
-            <Descriptions
-              title={`Dados do Processo #${process?.process}`}
-              bordered
-            >
-              <Descriptions.Item label="Número do Processo">
-                {process?.process}
-              </Descriptions.Item>
-              <Descriptions.Item label="Vara">
-                {process?.stick}
-              </Descriptions.Item>
-              <Descriptions.Item label="Valor">
-                {formatValue(process?.value)}
-              </Descriptions.Item>
-              <Descriptions.Item label="Tipo de Processo">
-                {process?.processType}
-              </Descriptions.Item>
-              <Descriptions.Item label="Advogado de Defesa" span={2}>
-                {process?.lawyer}
-              </Descriptions.Item>
-              <Descriptions.Item label="Status" span={3}>
-                {process?.state === ProcessState.FINISHED ? (
-                  <Tag color="cyan">Finalizado</Tag>
-                ) : (
-                  <Badge
-                    status="processing"
-                    text={
-                      process?.state === ProcessState.OPEN
-                        ? 'Aberto'
-                        : 'Em Andamento'
-                    }
-                  />
-                )}
-              </Descriptions.Item>
-              <Descriptions.Item label="Descrição" span={3}>
-                {process?.subject}
-              </Descriptions.Item>
-              <Descriptions.Item label="Parecer" span={3}>
-                {process?.opinion}
-              </Descriptions.Item>
-              <Descriptions.Item label="Data de Cadastro">
-                {formatDate(process?.createdAt)}
-              </Descriptions.Item>
-              <Descriptions.Item label="Última atualização">
-                {formatDate(process?.updatedAt)}
-              </Descriptions.Item>
-            </Descriptions>
+            <ProcessInfo process={process} />
           </Card>
         </Col>
       </Row>

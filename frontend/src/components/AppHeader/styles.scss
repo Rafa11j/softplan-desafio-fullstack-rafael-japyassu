@@ -5,11 +5,14 @@
   background: #0d47a1;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
   
-  h2 {
-    color: #fff;
+  .header-logo {
+    cursor: pointer;
+    h2 {
+      color: #fff;
+    }
   }
 
-  .header-actions {
+  .header-actions, .header-actions-mobile {
     ul {
       list-style: none;
       display: flex;
@@ -50,5 +53,20 @@
     }
 
 
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .header-actions  {
+    display: none;
+  }
+  .header-actions-mobile {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .header-actions-mobile {
+    display: none;
   }
 }

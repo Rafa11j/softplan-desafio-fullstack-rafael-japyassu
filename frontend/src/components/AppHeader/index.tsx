@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { Layout } from 'antd';
+import { Layout, Menu, Dropdown, Button } from 'antd';
 import { FaHome, FaUsers, FaGavel, FaSignOutAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
 import { UserTypes } from '../../enums/enums';
 
@@ -12,6 +12,7 @@ const { Header } = Layout;
 
 const AppHeader: React.FC = () => {
   const { user, signOut } = useAuth();
+  const history = useHistory();
 
   const renderItemsMenu = useCallback(() => {
     if (user.userType === UserTypes.ADMINISTRATOR) {
@@ -44,17 +45,49 @@ const AppHeader: React.FC = () => {
     );
   }, [user.userType]);
 
+  const renderItemsMenuMobile = useCallback(() => {
+    if (user.userType === UserTypes.ADMINISTRATOR) {
+      return (
+        <Menu.Item>
+          <Link to="/usuarios">Usuários</Link>
+        </Menu.Item>
+      );
+    }
+    if (user.userType === UserTypes.TRIATOR) {
+      return (
+        <Menu.Item>
+          <Link to="/processos">Processos</Link>
+        </Menu.Item>
+      );
+    }
+    return (
+      <Menu.Item>
+        <Link to="/meus-processos">Meus Processos</Link>
+      </Menu.Item>
+    );
+  }, [user.userType]);
+
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <Link to="/inicio">Início</Link>
+      </Menu.Item>
+      {renderItemsMenuMobile()}
+      <Menu.Item onClick={signOut}>Sair</Menu.Item>
+    </Menu>
+  );
+
   return (
     <Header className="app-header">
-      <div className="header-logo">
+      <div className="header-logo" onClick={() => history.push('/inicio')}>
         <h2>ADVSoft</h2>
       </div>
       <div className="header-actions">
         <ul>
-          <li className="menu-item">
+          <Link to="/inicio" className="menu-item">
             <FaHome />
             Início
-          </li>
+          </Link>
           {renderItemsMenu()}
           <li className="menu-item" onClick={signOut}>
             <FaSignOutAlt />
@@ -63,6 +96,21 @@ const AppHeader: React.FC = () => {
           <li className="menu-item-profile">
             <img src={profile} alt="ProfileImage" />
             {user.name}
+          </li>
+        </ul>
+      </div>
+      <div className="header-actions-mobile">
+        <ul>
+          <li className="menu-item-profile">
+            <Dropdown
+              overlay={menu}
+              placement="bottomCenter"
+              trigger={['click']}
+            >
+              <Button shape="round" className="btn-profile-mobile">
+                {user.name}
+              </Button>
+            </Dropdown>
           </li>
         </ul>
       </div>
