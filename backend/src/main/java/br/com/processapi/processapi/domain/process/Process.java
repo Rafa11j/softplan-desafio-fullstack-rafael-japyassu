@@ -33,7 +33,7 @@ public class Process {
     @Column(columnDefinition = "text", nullable = false)
     private String subject;
 
-    @Column(columnDefinition="Decimal(20,2)", nullable = false)
+    @Column(columnDefinition="numeric(20,2)", nullable = false)
     private Float value;
 
     @Column(nullable = false)

@@ -3,7 +3,7 @@ spring:
         database: POSTGRESQL
         show-sql: true
         hibernate:
-            ddl-auto: update
+            ddl-auto: validate
     datasource:
         platform: postgres
         username: postgres
@@ -12,6 +12,12 @@ spring:
         driver-class-name: org.postgresql.Driver
         hikari:
           auto-commit: true
+    flyway:
+      clean-disabled: false
+      clean-on-validation-error: false
+      table: migrations_history
+      locations:
+        - classpath:db/migrations
 
 jwt:
     secret: 463a6dcdce9b50b5a803449692b5523c

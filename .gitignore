@@ -10,5 +10,7 @@ backend/*.iws
 backend/*.iml
 backend/*.ipr
 
+.DS_Store
+
 ### VS Code ###
 backend/.vscode/

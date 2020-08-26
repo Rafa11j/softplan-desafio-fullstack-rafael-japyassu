@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  postgresqldb:
+    image: postgres:latest
+    container_name: processapidatabase
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=db_desafio_softplan
+
+  api:
+    image: process-api:latest
+    container_name: process-api
+    build: ./
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgresqldb
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://processapidatabase:5432/db_desafio_softplan
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=docker
