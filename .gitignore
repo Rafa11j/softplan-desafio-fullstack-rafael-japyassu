@@ -12,5 +12,7 @@ backend/*.ipr
 
 .DS_Store
 
+.env
+
 ### VS Code ###
 backend/.vscode/
