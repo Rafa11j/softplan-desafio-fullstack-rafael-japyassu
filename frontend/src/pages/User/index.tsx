@@ -95,12 +95,6 @@ const User: React.FC = () => {
       return (
         <Menu>
           <Menu.Item
-            icon={<EyeOutlined />}
-            onClick={() => navigate(`usuarios/${id}`)}
-          >
-            Visualizar
-          </Menu.Item>
-          <Menu.Item
             icon={<EditOutlined />}
             onClick={() => navigate(`usuarios/cadastro/${id}`)}
           >
