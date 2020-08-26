@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Table, Tag, Button, Dropdown, Menu } from 'antd';
+import { Table, Tag, Button, Dropdown, Menu, notification } from 'antd';
 import { EyeOutlined, PlusOutlined, TeamOutlined } from '@ant-design/icons';
 import { FaEllipsisV } from 'react-icons/fa';
 import { ColumnsType } from 'antd/lib/table';
@@ -116,11 +116,28 @@ const Process: React.FC = () => {
   useEffect(() => {
     async function loadProcess() {
       setLoading(true);
-      const response = await api.get('/process');
-      setTimeout(() => {
-        setProcess(response.data.data);
+      try {
+        const response = await api.get('/process');
+        setTimeout(() => {
+          setProcess(response.data.data);
+          setLoading(false);
+        }, 1500);
+      } catch (err) {
         setLoading(false);
-      }, 1500);
+        if (err.response !== undefined) {
+          err.response.data.errors.map((erro: string) => {
+            notification.warning({
+              message: 'Alerta',
+              description: erro,
+            });
+          });
+        } else {
+          notification.error({
+            message: 'Erro',
+            description: 'Falha no servidor!',
+          });
+        }
+      }
     }
 
     loadProcess();

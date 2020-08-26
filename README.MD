@@ -87,7 +87,7 @@ Segundo:
 
 ### Páginas da Aplicação
 
- - Login
+ - Login (/login)
  - Início (/inicio)
  - Módulo de usuários (/usuarios/**)
  - Módulo de Processo (/processo/**)
